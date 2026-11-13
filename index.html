@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>业财一体化经营数据体系建设 · IT 半年度工作规划</title>
+  <style>
+    :root {
+      --bg: #f3f1ec;
+      --paper: #fffdf9;
+      --ink: #15202b;
+      --muted: #5a6472;
+      --line: #d5d0c6;
+      --accent: #0b4f45;
+      --soft: #e7f2ef;
+      --blue: #1e4f8a;
+      --blue-soft: #e6eef8;
+      --amber: #9a5b16;
+      --amber-soft: #f7efe3;
+      --violet: #5b3f8c;
+      --violet-soft: #efe9f7;
+      --red: #a23b2a;
+      --red-soft: #f8e8e4;
+      --card: #fff;
+      --shadow: 0 10px 30px rgba(21, 32, 43, .06);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: linear-gradient(180deg, #e9efe9 0, transparent 300px), var(--bg);
+      font-family: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.68;
+      font-size: 15px;
+    }
+    .wrap { width: 100%; max-width: 1680px; margin: 0 auto; padding: 24px clamp(12px, 2.2vw, 36px) 64px; }
+
+    .gantt { min-width: 900px; }
+    .grow { display: grid; grid-template-columns: minmax(220px, 1.6fr) repeat(6, 1fr); gap: 0 4px; align-items: center; min-height: 34px; border-bottom: 1px dashed #e6e2d9; }
+    .grow > .bar { grid-row: 1; }
+    .grow > .glabel { grid-column: 1 / 2; grid-row: 1; font-size: 13px; padding-right: 10px; }
+    .ghead { font-size: 12.5px; font-weight: 800; color: var(--muted); text-align: center; border-bottom: 2px solid var(--line); min-height: 30px; }
+    .ghead .glabel { text-align: left; }
+    .gsec { margin: 12px 0 4px; font-size: 12px; font-weight: 800; letter-spacing: .1em; color: var(--accent); }
+    .bar { border-radius: 7px; padding: 5px 8px; font-size: 11.5px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin: 4px 0; }
+    .bar.base { background: #cfe3dc; color: #0b4f45; }
+    .bar.base2 { background: #e7f2ef; color: #0b4f45; border: 1px dashed #9cc7ba; }
+    .bar.ops { background: #bcd1ee; color: #1e4f8a; }
+    .bar.ops2 { background: #e6eef8; color: #1e4f8a; border: 1px dashed #9db8de; }
+    .bar.fin { background: #9fcfc1; color: #083c34; }
+    .bar.fin2 { background: #e7f2ef; color: #0b4f45; border: 1px dashed #8dc0b1; }
+    .bar.mon { background: #ecd3ae; color: #7a470f; }
+    .bar.mon2 { background: #f7efe3; color: #9a5b16; border: 1px dashed #dcb987; }
+    .bar.cash { background: #d6c8ee; color: #4a2f78; }
+    .bar.cash2 { background: #efe9f7; color: #5b3f8c; border: 1px dashed #bba7dd; }
+    tr.em td { font-size: 16px; background: var(--amber-soft) !important; }
+    tr.em td:first-child { color: var(--amber); font-weight: 800; }
+    .model { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 8px; }
+    .mcard { border: 1px solid var(--line); border-radius: 14px; padding: 16px; background: var(--paper); }
+    .mcard h5 { margin: 0 0 8px; font-size: 15px; color: var(--accent); }
+    .mcard .src { font-size: 12.5px; color: var(--muted); margin-bottom: 8px; }
+    .mcard .src b { color: var(--ink); }
+    .mcard ul { margin: 0; font-size: 13.5px; }
+    .mcard .out { margin-top: 8px; font-size: 13px; padding: 8px 10px; border-radius: 8px; background: var(--soft); }
+    .formula { font-family: ui-monospace, Menlo, monospace; font-size: 12.5px; background: #fff; border: 1px solid var(--line); padding: 1px 6px; border-radius: 6px; }
+    .hero, section.block {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 28px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow);
+    }
+    .hero { background: var(--paper); padding: 34px; }
+    .eyebrow { color: var(--accent); font-size: 12px; letter-spacing: .14em; font-weight: 700; margin-bottom: 8px; }
+    h1 { margin: 0 0 6px; font-size: clamp(26px, 4vw, 38px); line-height: 1.2; letter-spacing: -.01em; }
+    .sub { font-size: 18px; color: var(--muted); font-weight: 600; margin: 0 0 14px; }
+    .lead { color: var(--muted); margin: 0; max-width: 54em; }
+    .meta { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+    .meta b { color: var(--ink); }
+    nav.toc {
+      position: sticky; top: 0; z-index: 30;
+      display: flex; flex-wrap: wrap; gap: 6px;
+      padding: 10px; margin-bottom: 16px;
+      border: 1px solid var(--line); border-radius: 14px;
+      background: rgba(243,241,236,.93); backdrop-filter: blur(8px);
+    }
+    nav.toc a { text-decoration: none; color: var(--ink); font-size: 13px; padding: 6px 11px; border-radius: 999px; }
+    nav.toc a:hover { background: #fff; }
+    nav.toc a.hl { background: var(--amber-soft); color: var(--amber); font-weight: 700; }
+    h2 { margin: 0 0 6px; font-size: 22px; display: flex; gap: 10px; align-items: center; }
+    h3 { margin: 22px 0 10px; font-size: 16.5px; }
+    h4 { margin: 14px 0 8px; font-size: 15px; }
+    .num {
+      min-width: 28px; height: 28px; border-radius: 8px; padding: 0 6px;
+      display: inline-flex; align-items: center; justify-content: center;
+      background: var(--soft); color: var(--accent); font-size: 13px; font-weight: 800;
+    }
+    .desc { color: var(--muted); font-size: 14px; margin: 0 0 16px; }
+    p { margin: 0 0 12px; }
+    ul, ol { margin: 0 0 12px; padding-left: 1.25em; }
+    li { margin: 4px 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin: 8px 0 14px; }
+    th, td { border: 1px solid var(--line); padding: 9px 11px; text-align: left; vertical-align: top; }
+    th { background: #f2efe8; font-weight: 650; }
+    tr:nth-child(even) td { background: #fafaf7; }
+    .note { border-left: 3px solid var(--accent); background: var(--soft); padding: 12px 14px; border-radius: 0 10px 10px 0; font-size: 14px; margin: 12px 0; }
+    .note.amber { border-left-color: var(--amber); background: var(--amber-soft); }
+    .tag { display: inline-block; font-size: 12px; font-weight: 700; padding: 2px 8px; border-radius: 999px; background: var(--soft); color: var(--accent); }
+    .tag.blue { background: var(--blue-soft); color: var(--blue); }
+    .tag.amber { background: var(--amber-soft); color: var(--amber); }
+    .tag.violet { background: var(--violet-soft); color: var(--violet); }
+    .tag.gray { background: #eef0f3; color: #334155; }
+
+    .summary { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .sbox { border: 1px solid var(--line); border-radius: 14px; padding: 16px; background: var(--paper); }
+    .sbox h4 { margin: 0 0 8px; font-size: 14.5px; color: var(--accent); }
+    .sbox p, .sbox li { font-size: 14px; }
+    .sbox ul { margin: 0; }
+    .sbox.wide { grid-column: 1 / -1; }
+    .money-big { font-size: 22px; font-weight: 800; color: var(--accent); }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .card { border: 1px solid var(--line); border-radius: 14px; padding: 15px; background: var(--paper); }
+    .card h4 { margin: 0 0 6px; }
+    .card p { margin: 0; font-size: 13.5px; color: var(--muted); }
+
+    .cal { border-radius: 14px; padding: 15px; border: 1px solid var(--line); }
+    .cal .t { font-size: 13px; color: var(--muted); }
+    .cal .n { font-size: 18px; font-weight: 800; margin: 4px 0; }
+    .cal .k { font-size: 13px; }
+    .cal.ops { background: var(--blue-soft); } .cal.ops .n { color: var(--blue); }
+    .cal.fin { background: var(--soft); } .cal.fin .n { color: var(--accent); }
+    .cal.mon { background: var(--amber-soft); } .cal.mon .n { color: var(--amber); }
+    .cal.cash { background: var(--violet-soft); } .cal.cash .n { color: var(--violet); }
+
+    .diagram { border: 1px solid var(--line); border-radius: 14px; background: linear-gradient(180deg, #fcfbf8, #f7f5f0); padding: 16px; margin: 12px 0 16px; overflow-x: auto; }
+    .diagram .cap { font-size: 12px; color: var(--muted); margin: 0 0 10px; font-weight: 700; letter-spacing: .04em; }
+    .chain { display: flex; align-items: stretch; gap: 0; flex-wrap: nowrap; min-width: 760px; }
+    .chain .node { flex: 1; background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 12px; text-align: center; font-size: 13px; }
+    .chain .node b { display: block; font-size: 14px; margin-bottom: 2px; }
+    .chain .node.ops { background: var(--blue-soft); }
+    .chain .node.fin { background: var(--soft); }
+    .chain .node.mon { background: var(--amber-soft); }
+    .chain .node.cash { background: var(--violet-soft); }
+    .chain .link { width: 74px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 11.5px; color: var(--muted); text-align: center; }
+    .chain .link span { font-size: 18px; color: var(--accent); font-weight: 800; line-height: 1; }
+
+    .phases { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .phase { border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: #fff; }
+    .phase .hd { padding: 11px 14px; font-weight: 800; font-size: 14.5px; }
+    .phase .bd { padding: 12px 14px; font-size: 13.5px; }
+    .phase .bd ul { margin: 0; }
+    .phase.p1 .hd { background: var(--blue-soft); color: var(--blue); }
+    .phase.p2 .hd { background: var(--amber-soft); color: var(--amber); }
+    .phase.p3 .hd { background: var(--violet-soft); color: var(--violet); }
+    .through { margin-top: 10px; border: 1px dashed var(--accent); border-radius: 12px; padding: 10px 14px; font-size: 13.5px; background: var(--soft); }
+
+    .sol { border: 1px solid var(--line); border-radius: 14px; padding: 18px; margin: 12px 0; background: #fff; }
+    .sol .sh { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; align-items: baseline; margin-bottom: 8px; }
+    .sol .sh h4 { margin: 0; font-size: 16px; }
+    .sol .fix { font-size: 12px; color: var(--muted); }
+    .group-title { margin: 26px 0 4px; font-size: 13px; font-weight: 800; letter-spacing: .1em; color: var(--accent); }
+
+    .tl { width: 100%; border-collapse: separate; border-spacing: 6px; font-size: 13px; }
+    .tl th { font-size: 12.5px; color: var(--muted); text-align: center; border: 0; background: none; padding: 4px; }
+    .tl th.row { text-align: left; width: 140px; }
+    .tl td { text-align: center; border-radius: 10px; padding: 9px 6px; background: #f6f4ef; color: var(--muted); border: 0; }
+    .tl td.row { text-align: left; background: none; color: var(--ink); font-weight: 700; }
+    .tl td.ops { background: var(--blue-soft); color: var(--blue); font-weight: 800; }
+    .tl td.fin { background: var(--soft); color: var(--accent); font-weight: 800; }
+    .tl td.minus { background: var(--red-soft); color: var(--red); font-weight: 800; }
+    .tl td.mon { background: var(--amber-soft); color: var(--amber); font-weight: 800; }
+    .tl small { display: block; font-weight: 500; font-size: 11px; color: var(--muted); }
+
+    .fields { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .fbox { border: 1px solid var(--line); border-radius: 12px; padding: 12px; background: var(--paper); font-size: 13px; }
+    .fbox b { display: block; font-size: 12px; letter-spacing: .06em; color: var(--muted); margin-bottom: 6px; }
+    .fbox.time { background: var(--blue-soft); }
+
+    .arch { display: grid; grid-template-columns: 1fr 34px 1.2fr 34px 1fr; align-items: stretch; }
+    .arch .col { border: 1px solid var(--line); border-radius: 14px; padding: 14px; background: #fff; }
+    .arch .col.core { border: 2px solid var(--accent); background: var(--soft); }
+    .arch .col h4 { margin: 0 0 8px; font-size: 14.5px; }
+    .arch .col ul { margin: 0; font-size: 13px; }
+    .arch .arr { display: flex; align-items: center; justify-content: center; color: var(--muted); font-weight: 800; font-size: 18px; }
+
+    .decide { counter-reset: d; list-style: none; padding: 0; }
+    .decide li { counter-increment: d; position: relative; padding: 14px 14px 14px 58px; border: 1px solid var(--line); border-radius: 12px; margin: 10px 0; background: var(--paper); }
+    .decide li::before { content: counter(d); position: absolute; left: 14px; top: 14px; width: 30px; height: 30px; border-radius: 8px; background: var(--amber-soft); color: var(--amber); font-weight: 800; display: flex; align-items: center; justify-content: center; }
+    .decide li b { display: block; margin-bottom: 4px; }
+    .decide li span { font-size: 13.5px; color: var(--muted); }
+
+    footer { text-align: center; color: var(--muted); font-size: 12px; margin-top: 18px; }
+
+    @media (max-width: 860px) {
+      .summary, .grid-2, .grid-4, .phases, .fields, .model { grid-template-columns: 1fr; }
+      .arch { grid-template-columns: 1fr; }
+      .arch .arr { transform: rotate(90deg); height: 28px; }
+      .hero, section.block { padding: 20px 16px; }
+    }
+    @media print {
+      nav.toc { display: none; }
+      body { background: #fff; }
+      .hero, section.block { box-shadow: none; break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow">韩路 · IT 部门 · 半年度工作规划</div>
+    <h1>业财一体化经营数据体系建设</h1>
+    <p class="sub">IT 半年度工作规划</p>
+    <p class="lead">建立运营、财务、资金三方共用一套可信数据的经营管理体系。先完成按天的运营管理报表与财务管理报表，并实现相互核对；再建设财务月表与资金对账体系；过程中持续完善口径、规则和业务系统，为后续企业管理系统和自动化打基础。</p>
+    <div class="meta">
+      <div><b>编制</b> 王翰宇（IT 部门）</div>
+      <div><b>周期</b> 半年（M1–M6）</div>
+      <div><b>团队</b> 1+1（负责人 + 全栈工程师）</div>
+    </div>
+  </header>
+
+  <nav class="toc">
+    <a href="#s0">摘要</a>
+    <a href="#s1">1. 目标</a>
+    <a href="#s2">2. 现状</a>
+    <a href="#s3">3. 问题</a>
+    <a href="#s4">4. 解决方案</a>
+    <a href="#s5">5. 实现方式</a>
+    <a href="#s6">6. 排期</a>
+    <a class="hl" href="#s7">7. 需老板决策</a>
+  </nav>
+
+  <!-- 摘要 -->
+  <section class="block" id="s0">
+    <h2><span class="num">0</span>一页摘要</h2>
+    <div class="summary">
+      <div class="sbox">
+        <h4>要达成什么</h4>
+        <ul>
+          <li>按天的运营管理报表，服务目标达成、团队绩效、补货、定价等经营决策</li>
+          <li>与之对应的财务管理报表，两边可逐项核对</li>
+          <li>财务月表与资金对账体系，经营、财务、资金三方可核对</li>
+        </ul>
+      </div>
+      <div class="sbox">
+        <h4>为什么现在做不到</h4>
+        <ul>
+          <li>运营报表由两人分别制作，口径不统一</li>
+          <li>财务除档口外以手工表格充当凭证，按结算口径确认收入，缺发货口径和准确成本</li>
+          <li>一物多码等基础数据不统一，各平台口径各异</li>
+        </ul>
+      </div>
+      <div class="sbox wide">
+        <h4>核心思路：一份数据，多种口径</h4>
+        <p style="margin:0">同一套订单明细同时记录创建、支付、发货、结算四个时间。按支付时间汇总得到运营日报，按发货时间汇总得到财务管报，按结算账单得到财务月报。运营与财务数据同源，差异只来自时间归属，可以逐单追溯。</p>
+      </div>
+      <div class="sbox wide">
+        <h4>怎么推进</h4>
+        <ul>
+          <li><b>第一阶段</b>：运营天表、财务天表，实现平台 ↔ 运营 ↔ 财务核对；在天表基础上建立目标达成、团队绩效、补货、定价等经营分析模型</li>
+          <li><b>第二阶段</b>：财务月表、资金对账，先跑起来再逐步做准</li>
+          <li><b>第三阶段</b>：企业管理系统串通主流程，自动化、智能化</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 1 目标 -->
+  <section class="block" id="s1">
+    <h2><span class="num">1</span>目标</h2>
+    <p class="desc">名称：业财一体化经营数据体系建设</p>
+
+    <h3>总目标</h3>
+    <p>建立运营、财务、资金三方共用一套可信数据的经营管理体系，用数据支撑经营决策：</p>
+    <ul>
+      <li><b>管理报表直接服务经营：</b>跟踪目标达成、评估团队绩效、给出补货建议、支撑定价策略、评估广告投放效果、分析商品款式表现（爆款、滞销、新品）、预警库存周转与滞销、对比渠道和店铺盈利以分配资源。</li>
+      <li><b>三方数据逐级可核对：</b>经营口径与财务口径核对，财务口径与资金口径核对，差异能说明来源。</li>
+    </ul>
+
+    <h3>分目标（按优先级）</h3>
+    <table>
+      <thead><tr><th style="width:26%">分目标</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td><b>1. 按天的运营管理报表</b></td><td>按国家、平台、店铺、商品按天产出，让运营和管理层每天看到目标达成、团队绩效、库存与补货、价格与利润空间，及时调整经营动作。</td></tr>
+        <tr><td><b>2. 对应的财务管理报表</b></td><td>与运营报表口径对应。天表只含直接成本和费用，看各渠道、店铺、商品的贡献利润；月表在天表基础上加入报销、薪资等其他成本和费用，得出完整经营利润。</td></tr>
+        <tr><td><b>3. 统一规则、口径，完善系统</b></td><td>收入确认、成本、费用归类、主数据、手工凭证与将来自动凭证的对账规则；按业财一体化需要补齐业务系统功能。</td></tr>
+        <tr><td><b>4. 准确的现金流量表</b></td><td>准确反映各主体、各账户的资金收支和余额，并与财务口径数据核对。</td></tr>
+      </tbody>
+    </table>
+    <div class="note">延伸目标（逐步实现，不限于本半年度）：自动生成凭证、业务系统与电商平台全面打通、AI 辅助经营分析。</div>
+  </section>
+
+  <!-- 2 现状 -->
+  <section class="block" id="s2">
+    <h2><span class="num">2</span>现状</h2>
+    <table>
+      <tbody>
+        <tr><td style="width:18%"><b>渠道与国家</b></td><td>国内：1688 分销、档口、未来国内电商；俄罗斯：自营仓 + Ozon / WB 的 FBS、FBO；美国：亚马逊、TikTok；墨西哥：美客多；韩国：Coupang。</td></tr>
+        <tr><td><b>主体与币种</b></td><td>国内各主体公司 + 跨境主体公司；人民币、卢布、美元、墨西哥比索、韩元。</td></tr>
+        <tr><td><b>供应链与物流</b></td><td>货品经领猫打版、大货生产后在聚水潭采购入库到国内自营仓，再按地区调拨：俄罗斯线发往俄罗斯自营仓后，FBO 送入平台官方仓、FBS 由自营仓发货；亚马逊线发往平台官方仓，由平台配送到消费者。</td></tr>
+        <tr class="em"><td><b>财务</b></td><td><b>档口用金蝶；其余业务以手工表格充当凭证；收入按结算账单口径确认。</b></td></tr>
+        <tr class="em"><td><b>数据与报表</b></td><td><b>运营报表由两人分别制作；数据存放在本地数据库，不利于企业重要数据留存。</b></td></tr>
+      </tbody>
+    </table>
+    <p>渠道、主体、币种、履约模式组合多，货物经过多段仓储和运输，各平台数据格式、结算周期、费用名目都不同，口径统一和管理难度大。</p>
+  </section>
+
+  <!-- 3 问题 -->
+  <section class="block" id="s3">
+    <h2><span class="num">3</span>问题</h2>
+    <p class="desc">业务扩张快于财务核算和数据体系建设，报表出不来、不及时、对不上、无法验证。先列报表层面的结果，再列背后原因。</p>
+
+    <h3>（一）报表层面</h3>
+    <table>
+      <tbody>
+        <tr><td style="width:8%"><b>R1</b></td><td>运营报表由瀚章、立新两人分别制作，口径和数据不统一，缺少跨平台统一的版本。</td></tr>
+        <tr><td><b>R2</b></td><td>财务管理报表不及时，难以辅助决策。</td></tr>
+        <tr><td><b>R3</b></td><td>运营与财务数据对不上，差异说不清来源。</td></tr>
+        <tr><td><b>R4</b></td><td>没有准确的现金流量表。</td></tr>
+        <tr><td><b>R5</b></td><td>报表准确性和计算逻辑无法验证。</td></tr>
+      </tbody>
+    </table>
+
+    <h3>（二）背后原因</h3>
+    <div class="grid-2">
+      <div class="card">
+        <h4>A. 基础数据不统一</h4>
+        <p>A1 聚水潭一物多码，用编码区分渠道，销售、成本、库存难以对应<br>A2 各平台编码自成体系<br>A3 店铺、主体、国家、币种、团队等主数据口径未统一</p>
+      </div>
+      <div class="card">
+        <h4>B. 收入口径不统一</h4>
+        <p>B1 按结算账单确认收入，结算周期不同，收入滞后、月度错位<br>B2 缺少按发货时间确认的收入数据<br>B3 改按发货口径后，与结算账单的对账难度增加<br>B4 订单从下单到回款各环节未串成一条线<br>B5 各平台费用名目不统一</p>
+      </div>
+      <div class="card">
+        <h4>C. 成本和库存算不准</h4>
+        <p>C1 跨境落地成本缺数据，头程、关税等未分摊到货品，俄罗斯链路运费分两段<br>C2 库存分布多处，多段调拨在途缺少统一跟踪和核对</p>
+      </div>
+      <div class="card">
+        <h4>D. 财务核算基础薄弱</h4>
+        <p>D1 除档口外以手工表格作凭证，难追溯、难复核<br>D2 多主体内部交易未系统化处理<br>D3 将来自动凭证与当前手工凭证之间缺少对账规则</p>
+      </div>
+      <div class="card" style="grid-column:1/-1">
+        <h4>E. 资金数据分散</h4>
+        <p>E1 资金分布在多主体、多账户、多币种以及各平台未结算余额中，实际资金全貌难汇总</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 解决方案 -->
+  <section class="block" id="s4">
+    <h2><span class="num">4</span>解决方案</h2>
+    <p class="desc">先打基础，再统一口径与规则，最后产出报表并建立核对体系。</p>
+
+    <h3>4.1 整体思路</h3>
+    <div class="diagram">
+      <p class="cap">图 1 · 三方逐级核对链</p>
+      <div class="chain">
+        <div class="node"><b>平台店铺数据</b>各渠道后台</div>
+        <div class="link"><span>⇄</span>店铺数据核对</div>
+        <div class="node ops"><b>运营天表</b>支付口径</div>
+        <div class="link"><span>⇄</span>同源明细核对</div>
+        <div class="node fin"><b>财务天表</b>发货口径</div>
+        <div class="link"><span>⇄</span>按创建日期核对</div>
+        <div class="node mon"><b>财务月表</b>结算口径</div>
+        <div class="link"><span>⇄</span>账单与流水匹配</div>
+        <div class="node cash"><b>资金流水</b>自动关账</div>
+      </div>
+    </div>
+    <div class="phases">
+      <div class="phase p1">
+        <div class="hd">第一阶段 · 天表先行</div>
+        <div class="bd"><ul>
+          <li>完成运营天表与财务天表</li>
+          <li>运营天表与平台店铺数据可核对</li>
+          <li>运营数据与财务天表可核对</li>
+          <li>先把销售渠道平台数据做准确</li>
+        </ul></div>
+      </div>
+      <div class="phase p2">
+        <div class="hd">第二阶段 · 月表与资金对账</div>
+        <div class="bd"><ul>
+          <li>建设财务月表与结算口径资金对账体系</li>
+          <li>先让体系跑起来，再逐步完善准确性</li>
+          <li>协助财务把核算规则逻辑做对</li>
+        </ul></div>
+      </div>
+      <div class="phase p3">
+        <div class="hd">第三阶段 · 企业管理系统</div>
+        <div class="bd"><ul>
+          <li>天表达到验收标准后启动</li>
+          <li>串通业务系统、平台、OA 等 ERP 主流程</li>
+          <li>凭证模型跑通后做自动凭证、自动对账</li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="through"><b>贯穿全程：</b>不断完善指标口径、规则、标准和业务系统。</div>
+
+    <h3>4.2 方案与问题对照</h3>
+    <table>
+      <thead><tr><th>方案</th><th>解决的问题</th><th>支撑的目标</th></tr></thead>
+      <tbody>
+        <tr><td>方案一 统一基础数据</td><td>A1、A2、A3、B5</td><td>全部</td></tr>
+        <tr><td>方案二 数据自动采集入仓</td><td>全部报表的数据来源</td><td>全部</td></tr>
+        <tr><td>方案三 同源多口径数据模型</td><td>R3、B1、B2、B3、B4</td><td>1、2、3</td></tr>
+        <tr><td>方案四 成本规则</td><td>C1</td><td>2、3</td></tr>
+        <tr><td>方案五 退款规则</td><td>R3、B3</td><td>1、2</td></tr>
+        <tr><td>方案六 费用、流量与税</td><td>B5</td><td>1、2</td></tr>
+        <tr><td>方案七 库存规则</td><td>C2</td><td>1、2</td></tr>
+        <tr><td>方案八 运营天表</td><td>R1</td><td>1</td></tr>
+        <tr><td>方案九 经营分析模型</td><td>R1（报表能直接用于经营决策）</td><td>1、总目标</td></tr>
+        <tr><td>方案十 财务天表与月表</td><td>R2、D1</td><td>2</td></tr>
+        <tr><td>方案十一 资金对账与对账体系</td><td>R4、R5、D2、D3、E1</td><td>3、4</td></tr>
+      </tbody>
+    </table>
+
+    <div class="group-title">打基础</div>
+
+    <div class="sol">
+      <div class="sh"><h4>方案一：统一基础数据</h4><span class="fix">解决 A1、A2、A3、B5</span></div>
+      <ol>
+        <li><b>商品主数据：</b>清洗聚水潭编码，得到唯一主 SKU；主 SKU 关联领猫，得到唯一主 SKC 和 SPU。各渠道编码作为别名挂在主 SKU 下，用于清洗历史数据；规范运营新建子编码的规则，后续由系统按规则生成规范编码，同时满足运营区分渠道的需要。未来继续向前关联设计环节基础信息，以及国内发往境外货品的原始需求和补货渠道。</li>
+        <li><b>主数据统一口径：</b>主体名称、销售地区、销售渠道、店铺、店铺负责人及子负责人、商品名称、仓库名称、品牌、商品类别（正品、赠品）、商品类目（多级分类，如男女装 → 休闲裤、卫衣）。</li>
+        <li><b>费用科目映射：</b>各平台费用类型逐个映射到统一管理费用科目，财务确认后固定；出现新费用类型时自动提示财务补映射。</li>
+      </ol>
+    </div>
+
+    <div class="sol">
+      <div class="sh"><h4>方案二：数据自动采集入仓</h4><span class="fix">全部报表的数据来源</span></div>
+      <ol>
+        <li><b>电商平台：</b>Ozon、WB、亚马逊、TikTok、美客多、Coupang，采集订单与发货明细、结算账单与资金流水、广告、平台仓库存、流量转化。</li>
+        <li><b>内部系统：</b>聚水潭（商品、采购入库、库存、调拨、销售出库）、领猫（款式、大货订单）、钉钉（报销审批）、金蝶（档口凭证）。</li>
+        <li><b>RPA / 爬虫任务：</b>平台或系统未提供 API 的数据，用 RPA / 爬虫定时任务自动获取。</li>
+        <li><b>钉钉在线表格：</b>标准成本、运营目标、店铺负责人与子负责人关系、主体与渠道对应关系、物流账单、薪资等人工维护数据，在钉钉在线表格中共享维护，系统定时同步。</li>
+      </ol>
+    </div>
+
+    <div class="group-title">统一口径与规则</div>
+
+    <div class="sol">
+      <div class="sh"><h4>方案三：同源多口径数据模型</h4><span class="fix">解决 R3、B1、B2、B3、B4</span></div>
+      <p>运营与财务报表来自同一批源数据，只是归属统计口径不同。</p>
+      <div class="grid-4">
+        <div class="cal ops"><div class="t">运营报表 · 天</div><div class="n">支付口径</div><div class="k">按支付时间归属</div></div>
+        <div class="cal fin"><div class="t">财务管报 · 天</div><div class="n">发货口径</div><div class="k">按发货时间归属</div></div>
+        <div class="cal mon"><div class="t">财务报表 · 月</div><div class="n">结算口径</div><div class="k">按结算账单归属</div></div>
+        <div class="cal cash"><div class="t">资金对账 · 月</div><div class="n">自动关账</div><div class="k">账单与资金流水匹配</div></div>
+      </div>
+
+      <h4>综合宽表字段</h4>
+      <p style="font-size:13.5px;color:var(--muted)">销售额来自销售订单明细，结算口径销售额来自财务账单数据源。粒度：一个订单的一个 SKU 一行。</p>
+      <div class="fields">
+        <div class="fbox time"><b>四个日期</b>创建日期<br>支付日期<br>发货日期<br>结算日期</div>
+        <div class="fbox"><b>全局维度</b>主体公司、销售地区、销售渠道、店铺名称、店铺负责人、品牌、商品类目、SPU、SKC、SKU</div>
+        <div class="fbox"><b>业务字段</b>订单号、销售数量、售价、用户实际付款金额、商家实收金额、平台实收金额</div>
+        <div class="fbox"><b>下游关联</b>成本表：标准成本单价、实际成本单价<br>退款表：两种口径的退款金额与数量</div>
+      </div>
+      <div class="note">核对原理：全部数据按<b>创建日期</b>归属统计时，各口径可以核对上，创建日期是统一的核对基准。</div>
+
+      <h4>示例：同一笔订单落在哪一天</h4>
+      <p style="font-size:13px;color:var(--muted)">订单 A1001：2 件，用户实付 200；11/01 支付，11/03 发货，11/10 退款 1 件 100，11/20 结算账单。数字为示意。</p>
+      <table class="tl">
+        <thead><tr><th class="row"></th><th>11/01</th><th>11/03</th><th>11/10</th><th>11/20</th></tr></thead>
+        <tbody>
+          <tr><td class="row">运营天表<small>支付口径</small></td><td class="ops">+200<br>退款 −100<small>回溯到原单支付日</small></td><td>—</td><td>—</td><td>—</td></tr>
+          <tr><td class="row">财务天表<small>发货口径</small></td><td>—</td><td class="fin">+200</td><td class="minus">退款 −100<small>退款成功当天扣减</small></td><td>—</td></tr>
+          <tr><td class="row">财务月表<small>结算口径</small></td><td>—</td><td>—</td><td>—</td><td class="mon">按账单入账</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="sol">
+      <div class="sh"><h4>方案四：成本规则</h4><span class="fix">解决 C1</span></div>
+      <p>设两套成本方案，分别服务运营管理和高管决策。</p>
+      <table>
+        <thead><tr><th style="width:14%"></th><th>标准成本</th><th>实际成本</th></tr></thead>
+        <tbody>
+          <tr><td><b>来源</b></td><td>商品部门维护的国内成本单价和跨境成本单价（内外主体间售价）</td><td>领猫下单环节与工厂确认的采购单价，与标准资料包价格比对校验</td></tr>
+          <tr><td><b>计算</b></td><td>直接取维护价格，不随供应商供价大幅波动</td><td>按每笔采购入库时间移动加权平均，采购退货逆向计算；按国内仓发货海外出库时间口径把头程分摊到 SKU，得出国内主体销往境外的成本单价</td></tr>
+          <tr><td><b>头程</b></td><td>—</td><td>按报价单与发货总重预估，再按单商品重量分摊；头程供应商真实账单到达后核对核销</td></tr>
+          <tr><td><b>其他计入</b></td><td>—</td><td>平台发货操作费、快递费，与财务确认后计入实际成本</td></tr>
+          <tr><td><b>可见范围</b></td><td>运营人员可查看</td><td>仅老板、高管可查看</td></tr>
+          <tr><td><b>用途</b></td><td>衡量运营 KPI / OKR 达成，用于团队管理</td><td>反映真实准确的经营情况，供高管决策</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:13.5px;color:var(--muted);margin:0">终端销售取同日期海外出库节点的成本单价，节点以发货、清关还是海外仓收货时间为准，与财务确定。实际成本规则与财务达成一致后推行。</p>
+    </div>
+
+    <div class="sol">
+      <div class="sh"><h4>方案五：退款规则</h4><span class="fix">解决 R3、B3</span></div>
+      <ol>
+        <li><b>取数：</b>按退款创建时间增量拉取全部退款原始记录。</li>
+        <li><b>财务当期口径：</b>按退款成功时间归属统计日期，在当期扣减，对应财务发货口径。</li>
+        <li><b>运营回溯口径：</b>按退款明细携带的单号关联原销售单，取原单支付时间归属，对应运营支付口径。</li>
+        <li><b>部分退款分摊：</b>一个订单多个 SKU、仅退款不退货且未退全额时，按各 SKU 售价占比分摊。</li>
+      </ol>
+    </div>
+
+    <div class="sol">
+      <div class="sh"><h4>方案六：费用、流量与税</h4><span class="fix">解决 B5</span></div>
+      <ol>
+        <li><b>天表费用范围：</b>只放与主营业务关联、可归因的费用。</li>
+        <li><b>商品广告：</b>按广告投放平台的归因规则归属到具体商品。</li>
+        <li><b>店铺、品牌等全局广告：</b>按当天各 SKU 销售额贡献度分摊。</li>
+        <li><b>其余费用（罚款、平台佣金等）：</b>按平台费用科目，按 SKU 销售额贡献度分摊。</li>
+        <li><b>流量数据：</b>直接使用平台已归因的流量数据，挂上公共维度。</li>
+        <li><b>税：</b>按财务标准计算。</li>
+      </ol>
+    </div>
+
+    <div class="sol">
+      <div class="sh"><h4>方案七：库存规则</h4><span class="fix">解决 C2</span></div>
+      <table>
+        <thead><tr><th style="width:16%">视角</th><th>范围与规则</th></tr></thead>
+        <tbody>
+          <tr><td><span class="tag blue">运营天表</span></td><td>
+            <b>跨境采购在途：</b>从国内仓发海外出库成功时间起，统计到海外仓签收前。<br>
+            <b>跨境在仓库存：</b>海外自营仓或平台仓库存，细分可发库存与进销存（采购入库、报废、找回、调拨、盘点、销售出库，按平台规则）。<br>
+            关联公共维度；未来增加渠道虚拟仓视角。</td></tr>
+          <tr><td><span class="tag">财务天表</span></td><td>在运营视角基础上，增加国内仓进销存：采购入库、退货出库、盘点出入、库内加工出入、报废、调拨、销售出库。</td></tr>
+          <tr><td><span class="tag amber">合并视角</span></td><td>看商品整体：国内仓、跨境在途、跨境仓的数量与货值。国内货值按国内实际成本，跨境货值与合并视角按海外销售实际成本；归属规则与财务确定后执行。</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="group-title">报表产出与核对</div>
+
+    <div class="sol">
+      <div class="sh"><h4>方案八：运营天表</h4><span class="fix">解决 R1 · 支撑目标 1</span></div>
+      <ul>
+        <li>按支付口径归属到天，统一瀚章、立新两版报表的指标口径，形成唯一版本。</li>
+        <li>成本使用标准成本；目标值来自运营目标表。</li>
+        <li>作为经营分析模型（方案九）的数据基础。</li>
+        <li>与各平台店铺后台数据核对一致。</li>
+      </ul>
+    </div>
+
+    <div class="sol">
+      <div class="sh"><h4>方案九：经营分析模型</h4><span class="fix">让报表直接服务经营决策 · 支撑总目标</span></div>
+      <p>在销售额天表、成本表、退款表、费用表、流量表、库存表和钉钉在线表格维护的目标表、负责人关系表之上建立分析模型。运营视角一律使用标准成本；同一模型提供给老板、高管的版本使用实际成本。模型中的天数、比例等阈值由运营确定，可随时调整。</p>
+      <div class="model">
+
+        <div class="mcard">
+          <h5>1. 目标达成</h5>
+          <div class="src">用到：<b>运营目标表</b>（店铺、团队、月度销售额与利润目标）+ <b>运营天表</b>（支付口径）</div>
+          <ul>
+            <li>当月达成率 = <span class="formula">当月累计实际 ÷ 当月目标</span></li>
+            <li>时间进度 = <span class="formula">已过天数 ÷ 当月天数</span></li>
+            <li>进度差 = <span class="formula">达成率 − 时间进度</span>，为负即落后</li>
+            <li>全月预计 = <span class="formula">累计实际 ÷ 已过天数 × 当月天数</span></li>
+          </ul>
+          <div class="out">输出：按店铺、负责人、团队每天显示达成率和落后预警，飞书每日推送。</div>
+        </div>
+
+        <div class="mcard">
+          <h5>2. 团队绩效</h5>
+          <div class="src">用到：<b>店铺负责人与子负责人关系表</b> + 运营天表 + 成本表（标准成本）+ 费用表 + 目标表</div>
+          <ul>
+            <li>按负责人、团队汇总销售额、贡献利润、目标达成率</li>
+            <li>贡献利润 = <span class="formula">销售额 − 退款 − 标准成本 − 平台费用 − 广告费</span></li>
+            <li>辅助指标：广告投入产出比、退款率、库存周转天数</li>
+          </ul>
+          <div class="out">输出：月度团队与个人绩效排行，作为 KPI / OKR 考核依据。</div>
+        </div>
+
+        <div class="mcard">
+          <h5>3. 补货建议</h5>
+          <div class="src">用到：<b>库存表</b>（跨境在仓可发、跨境采购在途、国内仓可调拨）+ 运营天表（销量）</div>
+          <ul>
+            <li>日均销量 = 近 7 天与近 30 天日均加权</li>
+            <li>可售天数 = <span class="formula">（在仓可发 + 在途）÷ 日均销量</span></li>
+            <li>可售天数 &lt; 补货周期 + 安全天数 时触发提醒</li>
+            <li>建议补货量 = <span class="formula">目标天数 × 日均销量 − 在仓可发 − 在途</span></li>
+            <li>补货周期按线路设置：国内 → 俄罗斯自营仓、俄罗斯自营仓 → 平台仓、国内 → 亚马逊仓</li>
+          </ul>
+          <div class="out">输出：按 SKU、仓库的补货清单，区分「需补货 / 正常 / 库存过量」。</div>
+        </div>
+
+        <div class="mcard">
+          <h5>4. 定价策略</h5>
+          <div class="src">用到：运营天表（售价、销量）+ <b>成本表</b> + 费用表（佣金、罚款、广告分摊）</div>
+          <ul>
+            <li>单件贡献利润 = <span class="formula">售价 − 单件成本 − 单件平台费用 − 单件广告费</span></li>
+            <li>利润率 = <span class="formula">单件贡献利润 ÷ 售价</span></li>
+            <li>保本价 = 单件贡献利润为 0 时的售价</li>
+            <li>记录每次调价前后的销量与利润变化，评估调价效果</li>
+          </ul>
+          <div class="out">输出：每个 SKU 的利润率、保本价、低于保本价预警，调价前后对比。</div>
+        </div>
+
+        <div class="mcard">
+          <h5>5. 广告投放效果</h5>
+          <div class="src">用到：<b>费用表</b>（商品广告按平台归因、店铺品牌广告按销售额分摊）+ 运营天表 + 流量表</div>
+          <ul>
+            <li>投入产出比 = <span class="formula">广告带来的销售额 ÷ 广告费</span></li>
+            <li>广告费占比 = <span class="formula">广告费 ÷ 销售额</span></li>
+            <li>广告后贡献利润：扣除广告费后的贡献利润是否为正</li>
+            <li>结合曝光、点击、转化率定位问题环节</li>
+          </ul>
+          <div class="out">输出：按商品、店铺的广告效果排行，标出「高花费低产出」和「扣广告后亏损」的商品。</div>
+        </div>
+
+        <div class="mcard">
+          <h5>6. 商品款式表现</h5>
+          <div class="src">用到：<b>商品主数据</b>（SPU、SKC、品牌、类目）+ 运营天表 + 流量表 + 库存表</div>
+          <ul>
+            <li>新品：首单日期在近 N 天内，跟踪上新后的销量、转化爬坡</li>
+            <li>爆款：近 30 天销量排名前列且环比增长</li>
+            <li>滞销：近 30 天销量低且可售天数超过阈值</li>
+            <li>按 SPU、SKC 两级汇总，看款式整体和颜色表现</li>
+          </ul>
+          <div class="out">输出：爆款、新品、滞销三张清单，支撑追单、加推和清货决策。</div>
+        </div>
+
+        <div class="mcard">
+          <h5>7. 库存周转与滞销预警</h5>
+          <div class="src">用到：<b>库存表</b>（进销存、在仓、在途）+ 运营天表 + 成本表</div>
+          <ul>
+            <li>周转天数 = <span class="formula">平均库存 ÷ 日均销量</span></li>
+            <li>库龄：按采购入库日期分段（如 30 / 60 / 90 天以上）</li>
+            <li>周转天数或库龄超过阈值即预警</li>
+            <li>预警库存按成本计算货值，量化积压资金</li>
+          </ul>
+          <div class="out">输出：滞销预警清单与积压货值，运营视角按标准成本，高管视角按实际成本。</div>
+        </div>
+
+        <div class="mcard">
+          <h5>8. 渠道和店铺盈利对比</h5>
+          <div class="src">用到：<b>财务天表</b>（贡献利润）+ <b>财务月表</b>（完整经营利润）+ 主数据（主体、地区、渠道、店铺）</div>
+          <ul>
+            <li>按地区、渠道、店铺对比销售额、贡献利润、利润率</li>
+            <li>月度加入报销、薪资等费用后对比完整经营利润</li>
+            <li>计算各渠道利润贡献占比与广告、库存资源占用占比</li>
+          </ul>
+          <div class="out">输出：渠道、店铺盈利排行与资源占用对比，支撑人力、资金、广告预算向高回报渠道倾斜。</div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="sol">
+      <div class="sh"><h4>方案十：财务天表与月表</h4><span class="fix">解决 R2、D1 · 支撑目标 2</span></div>
+      <ul>
+        <li><b>财务天表：</b>按发货口径归属到天，只含直接成本和费用，看贡献利润；与运营天表按同源明细核对。</li>
+        <li><b>财务月表：</b>天表科目汇总（收入、成本、一部分营销费用）+ 营业外收入、管理费用、财务费用、研发费用（报销、工资等）。后者波动不大、不影响运营决策，只在月表体现。</li>
+        <li><b>协助财务：</b>提供平台数据完善科目对应关系；协助改善报销 OA，帮助报销准确归属到科目。</li>
+      </ul>
+    </div>
+
+    <div class="sol">
+      <div class="sh"><h4>方案十一：资金对账与对账体系</h4><span class="fix">解决 R4、R5、D2、D3、E1 · 支撑目标 3、4</span></div>
+      <ul>
+        <li><b>资金对账月表：</b>按账单口径与资金流水做匹配明细，在此基础上汇总各主体、各账户的资金收支和余额，形成现金流量表。</li>
+        <li><b>其他对账表（逐步增加）：</b>期末库存对照库存进销存并下钻单据明细；头程预估与真实账单核对；按需增加。</li>
+        <li><b>凭证与自动化：</b>财务规则先保证逻辑正确；凭证模型跑通后，再做自动生成凭证和自动对账。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 5 实现方式 -->
+  <section class="block" id="s5">
+    <h2><span class="num">5</span>实现方式</h2>
+
+    <div class="diagram">
+      <p class="cap">图 2 · 目标技术架构</p>
+      <div class="arch">
+        <div class="col">
+          <h4>数据来源</h4>
+          <ul>
+            <li>电商平台 API</li>
+            <li>聚水潭、领猫、钉钉、金蝶</li>
+            <li>RPA / 爬虫任务</li>
+            <li>钉钉在线表格（主数据、目标、标准成本等）</li>
+          </ul>
+        </div>
+        <div class="arr">→</div>
+        <div class="col core">
+          <h4>私有云服务器 · 企业级数据仓库</h4>
+          <ul>
+            <li>原始数据层：保留各来源原始数据</li>
+            <li>明细层：清洗、编码归一、补齐维度</li>
+            <li>汇总层：运营天表、财务天表、月表、对账表</li>
+          </ul>
+        </div>
+        <div class="arr">→</div>
+        <div class="col">
+          <h4>数据应用</h4>
+          <ul>
+            <li>BI 数据看板</li>
+            <li>飞书机器人定时推送销售信息</li>
+            <li>AI-BOSS 库：老板用 AI 问数、分析</li>
+            <li>AI-GM 库：运营管理人员按权限用 AI 问数、分析</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <table>
+      <thead><tr><th style="width:20%">事项</th><th>做法</th></tr></thead>
+      <tbody>
+        <tr><td><b>存储改造</b></td><td>现有本地数据库改为私有云服务器，建设企业级数据仓库，统一存储数据资产。</td></tr>
+        <tr><td><b>主数据线上化</b></td><td>需要人工维护的主数据前期在钉钉在线表格共享维护，人员更新后系统自动同步；运营目标表未来考虑升级为预算管理系统。</td></tr>
+        <tr><td><b>权限控制</b></td><td>实际成本仅老板、高管可见；AI-GM 库只包含运营管理人员权限范围内的数据，不含实际成本。</td></tr>
+        <tr><td><b>协助财务</b></td><td>向财务提供平台数据，协助完善科目对应关系及核算规则；协助改善报销 OA。</td></tr>
+        <tr><td><b>数据质量</b></td><td>每天自动检查数据是否按时入仓、条数金额是否与平台一致、编码与科目映射是否完整；每周抽查店铺数据；每月核对轧平。报表标注「试运行 / 已确认」状态，与财务现有手工表并行，核对一致后替代。</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 6 排期 -->
+  <section class="block" id="s6">
+    <h2><span class="num">6</span>排期</h2>
+    <p class="desc">M1 完成数据底座和平台数据接入，财务规则梳理同步启动；M3 运营天表上线，M4 财务天表上线并试点 AI 问数，M5 财务月表上线，M6 资金对账试运行并开展企业管理系统开发与完善。</p>
+
+    <h3>甘特图</h3>
+    <div class="diagram">
+      <div class="gantt">
+        <div class="grow ghead">
+          <div class="glabel">工作项</div>
+          <div>M1</div><div>M2</div><div>M3</div><div>M4</div><div>M5</div><div>M6</div>
+        </div>
+
+        <div class="gsec">基础建设</div>
+        <div class="grow"><div class="glabel">私有云服务器与数据仓库搭建</div><div class="bar base" style="grid-column:2/3">搭建</div><div class="bar base2" style="grid-column:3/4">调度 · 权限完善</div></div>
+        <div class="grow"><div class="glabel">电商平台接入（订单、结算、广告、库存、流量）</div><div class="bar base" style="grid-column:2/3">6 个平台全部接入</div></div>
+        <div class="grow"><div class="glabel">内部系统接入（聚水潭、领猫、钉钉、金蝶）</div><div class="bar base" style="grid-column:2/4">接口开发与历史回补</div></div>
+        <div class="grow"><div class="glabel">RPA / 爬虫任务（无 API 数据）</div><div class="bar base2" style="grid-column:3/6">逐个平台、逐个账户开发</div></div>
+        <div class="grow"><div class="glabel">商品主编码清洗（一物多码）</div><div class="bar base2" style="grid-column:2/3">规则调研</div><div class="bar base" style="grid-column:3/4">自动归并 · 运营确认</div><div class="bar base2" style="grid-column:4/5">子编码规范</div></div>
+        <div class="grow"><div class="glabel">主数据口径与钉钉在线表格</div><div class="bar base" style="grid-column:2/4">口径确认 · 表格建立 · 自动同步</div></div>
+
+        <div class="gsec">运营报表</div>
+        <div class="grow"><div class="glabel">运营指标口径统一（两版报表对齐）</div><div class="bar ops2" style="grid-column:2/4">逐项比对 · 口径表签字</div></div>
+        <div class="grow"><div class="glabel">运营天表（支付口径）</div><div class="bar ops2" style="grid-column:3/4">开发</div><div class="bar ops" style="grid-column:4/5">并行核对 · 上线 ◆</div></div>
+        <div class="grow"><div class="glabel">BI 看板、飞书推送</div><div class="bar ops" style="grid-column:4/8">随运营天表上线，逐步扩充</div></div>
+        <div class="grow"><div class="glabel">经营分析模型</div><div class="bar ops2" style="grid-column:4/5">目标达成 · 绩效 · 补货</div><div class="bar ops" style="grid-column:5/8">定价 · 广告 · 款式 · 周转 · 渠道盈利</div></div>
+        <div class="grow"><div class="glabel">AI-BOSS / AI-GM 问数</div><div class="bar ops" style="grid-column:5/6">试点 ◆</div><div class="bar ops2" style="grid-column:6/8">扩充问数范围 · 权限完善</div></div>
+
+        <div class="gsec">财务报表</div>
+        <div class="grow"><div class="glabel">财务现状与科目梳理（手工表格）</div><div class="bar fin2" style="grid-column:2/3">现状梳理</div></div>
+        <div class="grow"><div class="glabel">费用科目映射与分摊规则</div><div class="bar fin2" style="grid-column:2/4">梳理 · 与财务逐条确认</div><div class="bar fin" style="grid-column:4/5">规则落地</div></div>
+        <div class="grow"><div class="glabel">标准成本与退款规则</div><div class="bar fin2" style="grid-column:2/4">需求梳理 · 规则确认</div><div class="bar fin" style="grid-column:4/5">接入 · 落地</div></div>
+        <div class="grow"><div class="glabel">财务天表（发货口径）</div><div class="bar fin2" style="grid-column:2/4">口径确认</div><div class="bar fin2" style="grid-column:4/5">开发</div><div class="bar fin" style="grid-column:5/6">并行核对 · 上线 ◆</div></div>
+        <div class="grow"><div class="glabel">实际成本（移动加权、头程预估与核销）</div><div class="bar fin2" style="grid-column:2/5">现状调研 · 规则草案</div><div class="bar fin2" style="grid-column:5/6">规则确认</div><div class="bar fin" style="grid-column:6/8">试算 · 账单核销</div></div>
+        <div class="grow"><div class="glabel">库存进销存（运营、财务、合并视角）</div><div class="bar fin2" style="grid-column:2/7">运营视角 → 国内仓进销存 → 合并视角货值</div></div>
+        <div class="grow"><div class="glabel">财务月表</div><div class="bar mon2" style="grid-column:2/5">科目与口径梳理</div><div class="bar mon2" style="grid-column:5/6">开发</div><div class="bar mon" style="grid-column:6/7">与手工表并行 · 上线 ◆</div></div>
+        <div class="grow"><div class="glabel">协助财务完善核算规则与报销 OA</div><div class="bar mon2" style="grid-column:2/8">全程配合</div></div>
+
+        <div class="gsec">资金对账与企业管理系统</div>
+        <div class="grow"><div class="glabel">资金对账（账户清单、流水、匹配）</div><div class="bar cash2" style="grid-column:5/7">账户清单 · 流水采集</div><div class="bar cash" style="grid-column:7/8">匹配试运行 ◆</div></div>
+        <div class="grow"><div class="glabel">企业管理系统规划、开发与完善</div><div class="bar cash2" style="grid-column:6/7">规划</div><div class="bar cash" style="grid-column:7/8">开发与完善</div></div>
+      </div>
+      <p style="font-size:12px;color:var(--muted);margin:10px 0 0">◆ 为上线节点。深色为接入、落地、核对上线阶段，浅色为调研、梳理、开发、规则确认阶段。</p>
+    </div>
+
+    <h3>分月工作与里程碑</h3>
+    <table>
+      <thead><tr><th style="width:9%">月份</th><th>主要工作</th><th style="width:24%">里程碑</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="tag gray">M1</span></td>
+          <td>搭建私有云服务器和数据仓库；6 个电商平台的订单、结算、广告、库存、流量数据全部接入并回补历史；开始接入聚水潭、领猫、钉钉、金蝶；调研运营现有编码规则；收集两版运营报表并逐项列出指标差异；确认主数据口径，建立钉钉在线表格。财务侧同步启动：梳理现有手工表格与科目，开始费用科目映射、标准成本与退款规则、实际成本现状调研。</td>
+          <td>平台数据全部接入；数据起算时间确定；财务现状梳理完成</td>
+        </tr>
+        <tr>
+          <td><span class="tag gray">M2</span></td>
+          <td>内部系统接入完成；调度与权限完善；商品编码自动归并，运营逐条确认归不上的编码；运营指标口径表定稿签字；开发运营天表；开始 RPA / 爬虫任务开发；与财务逐条确认费用科目映射、分摊规则、退款规则和财务天表口径；起草实际成本规则。</td>
+          <td>主编码映射首轮完成；运营口径表定稿；财务天表口径确认</td>
+        </tr>
+        <tr>
+          <td><span class="tag blue">M3</span></td>
+          <td>运营天表与各平台后台并行核对，差异逐项查清后上线；BI 看板和飞书推送上线；目标达成、团队绩效、补货建议模型上线；费用分摊、标准成本、退款规则落地；开发财务天表；推行子编码规范；继续梳理财务月表科目口径。</td>
+          <td><b>运营天表上线</b></td>
+        </tr>
+        <tr>
+          <td><span class="tag">M4</span></td>
+          <td>财务天表与运营天表按同源明细并行核对后上线；AI-BOSS / AI-GM 问数试点；定价、广告、款式、库存周转、渠道盈利模型上线；与财务确认实际成本与头程核销规则；库存补充国内仓进销存；开发财务月表；整理资金账户清单。</td>
+          <td><b>财务天表上线</b>；AI 问数试点</td>
+        </tr>
+        <tr>
+          <td><span class="tag amber">M5</span></td>
+          <td>财务月表与财务现有手工表并行核对后上线；实际成本试算，头程账单核销；采集资金流水（接口与 RPA）；库存合并视角货值；协助财务改善报销 OA；扩充 AI 问数范围；企业管理系统规划。</td>
+          <td><b>财务月表上线</b></td>
+        </tr>
+        <tr>
+          <td><span class="tag violet">M6</span></td>
+          <td>资金对账：账单与资金流水匹配试运行；期末库存对照、头程核对等对账表；平台 → 运营 → 财务 → 资金整条核对链跑通；实际成本持续核销；企业管理系统开发与完善。</td>
+          <td>资金对账试运行；三方核对体系跑通；企业管理系统开发启动</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="note">
+      <b>天表验收标准（建议，与运营、财务商定）：</b>运营天表与平台后台销售额差异在 1% 以内；财务天表与运营天表的差异可逐项解释；连续 4 周达标。达标后进入第三阶段。
+    </div>
+  </section>
+
+  <!-- 7 待决策 -->
+  <section class="block" id="s7">
+    <h2><span class="num">7</span>需老板决策</h2>
+    <ol class="decide">
+      <li>
+        <b>数据从什么时间节点开始起算</b>
+        <span>影响历史数据回补范围（部分平台接口只能查近一段时间，更早的需后台导出）、实际成本与库存进销存的期初数，以及首版报表上线时间。</span>
+      </li>
+    </ol>
+  </section>
+
+  <footer>韩路 · 业财一体化经营数据体系建设 · IT 半年度工作规划</footer>
+</div>
+</body>
+</html>

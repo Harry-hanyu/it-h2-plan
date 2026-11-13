@@ -96,6 +96,63 @@
     .tline li::before { content: ""; position: absolute; left: -20px; top: 7px; width: 10px; height: 10px; border-radius: 50%; background: var(--blue); }
     .vtags { display: flex; flex-wrap: wrap; gap: 7px; }
     .vtag { background: #fff; border: 1px solid #e3c99f; color: #7a470f; border-radius: 999px; padding: 5px 11px; font-size: 13px; font-weight: 700; }
+
+    /* 业务流转流程图 */
+    .bflow { margin-top: 8px; }
+    .legend { display: flex; flex-wrap: wrap; gap: 8px 14px; font-size: 12.5px; color: var(--muted); margin-bottom: 12px; }
+    .legend span { display: inline-flex; align-items: center; gap: 6px; }
+    .legend i { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+    .stage { border: 1px solid var(--line); border-radius: 14px; background: #fff; padding: 14px 16px; }
+    .stage-hd { display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: 15px; margin-bottom: 10px; }
+    .stage-hd .sn { width: 24px; height: 24px; border-radius: 7px; background: var(--accent); color: #fff; font-size: 12.5px; display: inline-flex; align-items: center; justify-content: center; }
+    .stage-hd .sys { font-size: 12px; font-weight: 700; color: var(--muted); background: #f2efe8; border-radius: 999px; padding: 2px 9px; }
+    .stage-arrow { text-align: center; color: var(--accent); font-size: 20px; font-weight: 800; line-height: 1; margin: 6px 0; }
+    .steps { display: flex; flex-wrap: nowrap; align-items: stretch; gap: 6px; }
+    .steps > .step { flex: 1 1 0; min-width: 0; }
+    .sarr { flex: 0 0 auto; }
+    .step { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 9px 11px; font-size: 13.5px; font-weight: 700; display: flex; flex-direction: column; gap: 5px; min-width: 120px; }
+    .sarr { display: flex; align-items: center; color: var(--muted); font-weight: 800; }
+    .badge { display: inline-block; font-size: 12px; font-weight: 700; border-radius: 6px; padding: 3px 7px; line-height: 1.45; }
+    .badge.md { background: #d4ebe4; color: var(--accent); }
+    .badge.cost { background: #f1e2cb; color: #7a470f; }
+    .badge.inv { background: var(--blue-soft); color: var(--blue); }
+    .badge.fee { background: var(--red-soft); color: var(--red); }
+    .badge.rev { background: var(--violet-soft); color: var(--violet); }
+    .branch { display: grid; grid-template-columns: 74px 1fr; gap: 10px; align-items: center; margin-bottom: 8px; }
+    .br-label { font-size: 13px; font-weight: 800; color: var(--blue); background: var(--blue-soft); border-radius: 8px; padding: 8px 6px; text-align: center; }
+    .stage-side { margin-top: 10px; font-size: 13.5px; background: #faf8f3; border: 1px solid #ece7dc; border-radius: 10px; padding: 9px 12px; }
+    .stage-note { margin: 8px 0 0; font-size: 12.5px; color: var(--muted); }
+    .stage-note.warn { color: var(--amber); font-weight: 700; }
+    .pl { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .pl-col { border-radius: 12px; padding: 12px; }
+    .pl-col h5 { margin: 0 0 8px; font-size: 14px; }
+    .pl-col.ops { background: var(--blue-soft); } .pl-col.ops h5 { color: var(--blue); }
+    .pl-col.fin { background: var(--soft); } .pl-col.fin h5 { color: var(--accent); }
+    .pl-row { background: #fff; border-radius: 8px; padding: 7px 10px; font-size: 13.5px; font-weight: 700; }
+    .pl-op { text-align: center; font-size: 12.5px; color: var(--muted); margin: 4px 0; font-weight: 700; }
+    .pl-chain { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 12px; }
+    .pl-box { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 8px 12px; font-size: 13.5px; font-weight: 800; }
+    .pl-box.strong { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .pl-op2 { font-size: 12.5px; color: var(--muted); font-weight: 700; }
+    .formula-box { margin-top: 10px; border: 2px solid var(--accent); border-radius: 12px; padding: 12px 14px; background: var(--soft); font-size: 14px; font-weight: 700; }
+    .formula-box div { margin: 2px 0; }
+    .formula-box small { display: block; margin-top: 4px; font-weight: 500; color: var(--muted); font-size: 12.5px; }
+    .invflow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+    .seg { border-radius: 10px; padding: 12px 8px; text-align: center; font-size: 14px; font-weight: 800; }
+    .seg small { display: block; font-size: 11.5px; font-weight: 500; color: var(--muted); }
+    .seg.s1 { background: #e7f2ef; color: var(--accent); }
+    .seg.s2 { background: #cfe3dc; color: var(--accent); }
+    .seg.s3 { background: var(--blue-soft); color: var(--blue); }
+    .seg.s4 { background: #bcd1ee; color: var(--blue); }
+    .inv-span { border: 1px dashed var(--line); border-top: 3px solid var(--accent); border-radius: 0 0 10px 10px; padding: 6px 10px; text-align: center; font-size: 12.5px; font-weight: 700; background: #fff; }
+    .inv-span.cross { border-top-color: var(--blue); }
+    .inv-span.all { border-top-color: var(--amber); color: var(--amber); }
+    .inv-span.age { border-top-color: var(--violet); color: var(--violet); }
+    .traffic { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+    .tbox { border: 1px solid var(--line); border-radius: 12px; padding: 10px 14px; background: var(--paper); font-weight: 800; font-size: 14px; }
+    .tbox small { display: block; font-weight: 500; color: var(--muted); font-size: 12px; }
+    .tbox.strong { background: var(--soft); border-color: var(--accent); color: var(--accent); }
+    .top { font-size: 18px; font-weight: 800; color: var(--muted); }
     tr.em td { font-size: 16px; background: var(--amber-soft) !important; }
     tr.em td:first-child { color: var(--amber); font-weight: 800; }
     .model { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 8px; }
@@ -240,6 +297,12 @@
     @media (max-width: 860px) {
       .summary, .grid-2, .grid-4, .phases, .fields, .model { grid-template-columns: 1fr; }
       .ov { grid-template-columns: 1fr; }
+      .pl, .invflow { grid-template-columns: 1fr; }
+      .steps { flex-wrap: wrap; }
+      .steps > .step { flex: 1 1 100%; }
+      .sarr { display: none; }
+      .inv-span { grid-column: auto !important; }
+      .branch { grid-template-columns: 1fr; }
       .ov-arrow { transform: rotate(90deg); height: 28px; }
       section.block > h2 { margin: -20px -16px 14px; padding: 14px 16px; }
       .arch { grid-template-columns: 1fr; }
@@ -268,121 +331,20 @@
   </header>
 
   <nav class="toc">
-    <a href="#s0">摘要</a>
-    <a href="#s1">1. 目标</a>
-    <a href="#s2">2. 现状</a>
-    <a href="#s3">3. 问题</a>
+    <a href="#s2">1. 现状</a>
+    <a href="#s3">2. 问题</a>
+    <a href="#s1">3. 目标</a>
     <a href="#s4">4. 解决方案</a>
     <a href="#s5">5. 实现方式</a>
     <a href="#s6">6. 资源与预算</a>
     <a href="#s7">7. 排期</a>
     <a class="hl" href="#s8">8. 需老板决策</a>
+    <a href="#s0">摘要</a>
   </nav>
 
-  <!-- 摘要 -->
-  <section class="block" id="s0">
-    <h2><span class="num">0</span>一页摘要</h2>
-    <div class="ov">
-      <div class="ov-col pain">
-        <h4>为什么现在做不到</h4>
-        <div class="pain-item">运营报表由两人分别制作，口径不统一</div>
-        <div class="pain-item">财务除档口外以手工表格充当凭证，按结算口径确认收入，缺发货口径和准确成本</div>
-        <div class="pain-item">一物多码等基础数据不统一，各平台口径各异</div>
-      </div>
-      <div class="ov-arrow">→</div>
-      <div class="ov-col idea">
-        <h4>核心思路：一份数据，多种口径</h4>
-        <div class="idea-src">同一套订单明细<small>创建 · 支付 · 发货 · 结算 四个时间</small></div>
-        <div class="idea-down">↓</div>
-        <div class="idea-outs">
-          <div class="idea-out o1">运营天表 <span>支付口径</span></div>
-          <div class="idea-out o2">财务天表 <span>发货口径</span></div>
-          <div class="idea-out o3">财务月表 <span>结算口径</span></div>
-          <div class="idea-out o4">资金对账 <span>自动关账</span></div>
-        </div>
-      </div>
-      <div class="ov-arrow">→</div>
-      <div class="ov-col time">
-        <h4>怎么推进</h4>
-        <ul class="tline">
-          <li><b>第一阶段</b>：运营天表、财务天表，实现平台 ↔ 运营 ↔ 财务核对；建立经营分析模型</li>
-          <li><b>第二阶段</b>：财务月表、资金对账，先跑起来再逐步做准</li>
-          <li><b>第三阶段</b>：企业管理系统串通主流程，自动化、智能化</li>
-        </ul>
-      </div>
-      <div class="ov-arrow">→</div>
-      <div class="ov-col value">
-        <h4>要达成什么</h4>
-        <div class="vtags">
-          <span class="vtag">目标达成</span>
-          <span class="vtag">团队绩效</span>
-          <span class="vtag">补货</span>
-          <span class="vtag">定价</span>
-          <span class="vtag">运营与财务逐项核对</span>
-          <span class="vtag">经营、财务、资金三方核对</span>
-        </div>
-      </div>
-    </div>
-    <div class="summary">
-      <div class="sbox">
-        <h4>要达成什么</h4>
-        <ul>
-          <li>按天的运营管理报表，服务目标达成、团队绩效、补货、定价等经营决策</li>
-          <li>与之对应的财务管理报表，两边可逐项核对</li>
-          <li>财务月表与资金对账体系，经营、财务、资金三方可核对</li>
-        </ul>
-      </div>
-      <div class="sbox">
-        <h4>为什么现在做不到</h4>
-        <ul>
-          <li>运营报表由两人分别制作，口径不统一</li>
-          <li>财务除档口外以手工表格充当凭证，按结算口径确认收入，缺发货口径和准确成本</li>
-          <li>一物多码等基础数据不统一，各平台口径各异</li>
-        </ul>
-      </div>
-      <div class="sbox wide">
-        <h4>核心思路：一份数据，多种口径</h4>
-        <p style="margin:0">同一套订单明细同时记录创建、支付、发货、结算四个时间。按支付时间汇总得到运营日报，按发货时间汇总得到财务管报，按结算账单得到财务月报。运营与财务数据同源，差异只来自时间归属，可以逐单追溯。</p>
-      </div>
-      <div class="sbox wide">
-        <h4>怎么推进</h4>
-        <ul>
-          <li><b>第一阶段</b>：运营天表、财务天表，实现平台 ↔ 运营 ↔ 财务核对；在天表基础上建立目标达成、团队绩效、补货、定价等经营分析模型</li>
-          <li><b>第二阶段</b>：财务月表、资金对账，先跑起来再逐步做准</li>
-          <li><b>第三阶段</b>：企业管理系统串通主流程，自动化、智能化</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- 1 目标 -->
-  <section class="block" id="s1">
-    <h2><span class="num">1</span>目标</h2>
-    <p class="desc">名称：业财一体化经营数据体系建设</p>
-
-    <h3>总目标</h3>
-    <p>建立运营、财务、资金三方共用一套可信数据的经营管理体系，用数据支撑经营决策：</p>
-    <ul>
-      <li><b>管理报表直接服务经营：</b>跟踪目标达成、评估团队绩效、给出补货建议、支撑定价策略、评估广告投放效果、分析商品款式表现（爆款、滞销、新品）、预警库存周转与滞销、对比渠道和店铺盈利以分配资源。</li>
-      <li><b>三方数据逐级可核对：</b>经营口径与财务口径核对，财务口径与资金口径核对，差异能说明来源。</li>
-    </ul>
-
-    <h3>分目标（按优先级）</h3>
-    <table>
-      <thead><tr><th style="width:26%">分目标</th><th>说明</th></tr></thead>
-      <tbody>
-        <tr><td><b>1. 按天的运营管理报表</b></td><td>按国家、平台、店铺、商品按天产出，让运营和管理层每天看到目标达成、团队绩效、库存与补货、价格与利润空间，及时调整经营动作。</td></tr>
-        <tr><td><b>2. 对应的财务管理报表</b></td><td>与运营报表口径对应。天表只含直接成本和费用，看各渠道、店铺、商品的贡献利润；月表在天表基础上加入报销、薪资等其他成本和费用，得出完整经营利润。</td></tr>
-        <tr><td><b>3. 统一规则、口径，完善系统</b></td><td>收入确认、成本、费用归类、主数据、手工凭证与将来自动凭证的对账规则；按业财一体化需要补齐业务系统功能。</td></tr>
-        <tr><td><b>4. 准确的现金流量表</b></td><td>准确反映各主体、各账户的资金收支和余额，并与财务口径数据核对。</td></tr>
-      </tbody>
-    </table>
-    <div class="note">延伸目标（逐步实现，不限于本半年度）：自动生成凭证、业务系统与电商平台全面打通、AI 辅助经营分析。</div>
-  </section>
-
-  <!-- 2 现状 -->
+  <!-- 1 现状 -->
   <section class="block" id="s2">
-    <h2><span class="num">2</span>现状</h2>
+    <h2><span class="num">1</span>现状</h2>
     <table>
       <tbody>
         <tr><td style="width:18%"><b>渠道与国家</b></td><td>国内：1688 分销、档口、未来国内电商；俄罗斯：自营仓 + Ozon / WB 的 FBS、FBO；美国：亚马逊、TikTok；墨西哥：美客多；韩国：Coupang。</td></tr>
@@ -393,11 +355,150 @@
       </tbody>
     </table>
     <p>渠道、主体、币种、履约模式组合多，货物经过多段仓储和运输，各平台数据格式、结算周期、费用名目都不同，口径统一和管理难度大。</p>
+
+    <h3>业务流转与数据来源</h3>
+    <div class="diagram">
+      <p class="cap">图 · 从商品起源到财务净利润：每个环节产生哪些数据、怎样与财务对应</p>
+      <div class="bflow">
+        <div class="legend">
+          <span><i style="background:#d4ebe4"></i>主数据</span>
+          <span><i style="background:#f1e2cb"></i>成本</span>
+          <span><i style="background:#e6eef8"></i>库存</span>
+          <span><i style="background:#f8e8e4"></i>费用</span>
+          <span><i style="background:#efe9f7"></i>收入</span>
+        </div>
+
+        <div class="stage">
+          <div class="stage-hd"><span class="sn">1</span>商品起源</div>
+          <div class="steps">
+            <div class="step">研究爆款，分析出新款</div>
+            <div class="step">运营采购补货</div>
+            <div class="step">二次开发</div>
+          </div>
+        </div>
+        <div class="stage-arrow">↓</div>
+
+        <div class="stage">
+          <div class="stage-hd"><span class="sn">2</span>生产环节 <span class="sys">领猫</span></div>
+          <div class="steps">
+            <div class="step">设计师设计</div><div class="sarr">→</div>
+            <div class="step">审核版单</div><div class="sarr">→</div>
+            <div class="step">生产样衣<span class="badge md">款式 ID（款号前身）</span></div><div class="sarr">→</div>
+            <div class="step">标准资料包<span class="badge md">SPU（款号）</span></div><div class="sarr">→</div>
+            <div class="step">增加颜色<span class="badge md">SKC 编号</span></div><div class="sarr">→</div>
+            <div class="step">增加尺码<span class="badge md">SKU 编号</span></div>
+          </div>
+          <p class="stage-note">SKU 编号是 SPU 编号下的主数据。</p>
+        </div>
+        <div class="stage-arrow">↓</div>
+
+        <div class="stage">
+          <div class="stage-hd"><span class="sn">3</span>供应链环节 <span class="sys">工厂 · 聚水潭</span></div>
+          <div class="steps">
+            <div class="step">工厂下单<span class="badge inv">国内采购在途</span></div><div class="sarr">→</div>
+            <div class="step">与工厂确定供货价<span class="badge cost">本次采购价格</span></div><div class="sarr">→</div>
+            <div class="step">采购交货入库<span class="badge cost">移动加权平均 → 当期采购单价</span><span class="badge cost">加财务税率 → 含税 / 不含税采购单价</span><span class="badge inv">国内在仓</span></div>
+          </div>
+          <div class="stage-side"><b>标准成本：</b>有了采购单价后，按公司固定品类的国内对境外销售比例，得出标准成本单价。</div>
+        </div>
+        <div class="stage-arrow">↓</div>
+
+        <div class="stage">
+          <div class="stage-hd"><span class="sn">4</span>跨境物流 <span class="sys">国内仓 → 海外</span></div>
+          <div class="branch">
+            <div class="br-label">亚马逊线</div>
+            <div class="steps">
+              <div class="step">国内仓出库<span class="badge cost">头程分摊至 SKU（加财务税率）→ 实际成本单价</span></div><div class="sarr">→</div>
+              <div class="step">跨境在途<span class="badge inv">跨境视角的采购在途</span></div><div class="sarr">→</div>
+              <div class="step">亚马逊平台仓<span class="badge inv">跨境在仓</span></div>
+            </div>
+          </div>
+          <div class="branch">
+            <div class="br-label">俄罗斯线</div>
+            <div class="steps">
+              <div class="step">国内仓出库<span class="badge cost">头程分摊至 SKU</span></div><div class="sarr">→</div>
+              <div class="step">跨境在途<span class="badge inv">国内出库至海外收货前</span></div><div class="sarr">→</div>
+              <div class="step">俄罗斯自营仓收货<span class="badge cost">国内采购单价 + 头程分摊 → 采购成本价</span><span class="badge inv">跨境在仓</span></div><div class="sarr">→</div>
+              <div class="step">发往平台仓<span class="badge cost">二次头程分摊 → 跨境视角实际成本</span></div>
+            </div>
+          </div>
+          <div class="stage-side"><b>履约差异：</b>从平台仓履约，实际成本包含二次头程分摊；从自营仓履约，不含二次头程。</div>
+          <p class="stage-note warn">实际成本的流转为示意，具体计算规则待与财务确认。</p>
+        </div>
+        <div class="stage-arrow">↓</div>
+
+        <div class="stage">
+          <div class="stage-hd"><span class="sn">5</span>平台销售 <span class="sys">跨境电商平台</span></div>
+          <div class="steps">
+            <div class="step">运营投放广告<span class="badge fee">广告费</span></div><div class="sarr">→</div>
+            <div class="step">按平台运营规则<span class="badge fee">平台服务费、杂费、平台税等</span></div><div class="sarr">→</div>
+            <div class="step">消费者支付<span class="badge rev">运营视角销售额（支付口径）</span></div><div class="sarr">→</div>
+            <div class="step">订单发货成功<span class="badge rev">财务视角销售额（发货口径）</span></div>
+          </div>
+        </div>
+        <div class="stage-arrow">↓</div>
+
+        <div class="stage">
+          <div class="stage-hd"><span class="sn">6</span>收入与利润 <span class="sys">运营与财务同源</span></div>
+          <div class="pl">
+            <div class="pl-col ops">
+              <h5>运营视角</h5>
+              <div class="pl-row">销售额（支付口径）</div>
+              <div class="pl-op">− 税　− 回溯原单退款</div>
+              <div class="pl-row">运营收入（排退收入）</div>
+            </div>
+            <div class="pl-col fin">
+              <h5>财务视角</h5>
+              <div class="pl-row">销售额（发货口径）</div>
+              <div class="pl-op">− 税　− 当期退款</div>
+              <div class="pl-row">财务收入</div>
+            </div>
+          </div>
+          <div class="pl-chain">
+            <div class="pl-box">收入</div><div class="pl-op2">− 成本 →</div>
+            <div class="pl-box">毛利</div><div class="pl-op2">− 平台各项费用 →</div>
+            <div class="pl-box">利润</div><div class="pl-op2">− 其他科目费用 →</div>
+            <div class="pl-box strong">财务净利润</div>
+          </div>
+          <p class="stage-note">其他科目费用：管理费用、财务费用、非主营收支、股权等损益表计算项。</p>
+          <div class="formula-box">
+            <div>财务净利润 = 损益表中天表以外的科目 + 财务天表利润</div>
+            <div>财务天表利润 = 运营利润（运营收入按发货时间统计口径）</div>
+            <small>两者只是统计时间点不同，都是同源数据。</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>库存周转数据来源</h3>
+    <div class="diagram">
+      <div class="invflow">
+        <div class="seg s1">国内采购在途<small>大货下单至交货</small></div>
+        <div class="seg s2">国内在仓</div>
+        <div class="seg s3">跨境在途</div>
+        <div class="seg s4">跨境在仓</div>
+        <div class="inv-span" style="grid-column:1/3">国内视角</div>
+        <div class="inv-span cross" style="grid-column:3/5">跨境视角</div>
+        <div class="inv-span all" style="grid-column:1/5">整体合并货值：贯穿国内采购在途、国内在仓、跨境在途、跨境在仓</div>
+        <div class="inv-span age" style="grid-column:2/5">整体库龄：从国内采购入库时间起，经跨境在途库龄，到跨境在仓库龄</div>
+      </div>
+    </div>
+
+    <h3>流量分析数据来源</h3>
+    <div class="diagram">
+      <div class="traffic">
+        <div class="tbox">付费流量<small>跨境电商平台投放广告费</small></div>
+        <div class="top">+</div>
+        <div class="tbox">免费自然流量</div>
+        <div class="top">→</div>
+        <div class="tbox strong">相关转化指标</div>
+      </div>
+    </div>
   </section>
 
-  <!-- 3 问题 -->
+  <!-- 2 问题 -->
   <section class="block" id="s3">
-    <h2><span class="num">3</span>问题</h2>
+    <h2><span class="num">2</span>问题</h2>
     <p class="desc">业务扩张快于财务核算和数据体系建设，报表出不来、不及时、对不上、无法验证。先列报表层面的结果，再列背后原因。</p>
 
     <h3>（一）报表层面</h3>
@@ -434,6 +535,31 @@
         <p>E1 资金分布在多主体、多账户、多币种以及各平台未结算余额中，实际资金全貌难汇总</p>
       </div>
     </div>
+  </section>
+
+  <!-- 3 目标 -->
+  <section class="block" id="s1">
+    <h2><span class="num">3</span>目标</h2>
+    <p class="desc">名称：业财一体化经营数据体系建设</p>
+
+    <h3>总目标</h3>
+    <p>建立运营、财务、资金三方共用一套可信数据的经营管理体系，用数据支撑经营决策：</p>
+    <ul>
+      <li><b>管理报表直接服务经营：</b>跟踪目标达成、评估团队绩效、给出补货建议、支撑定价策略、评估广告投放效果、分析商品款式表现（爆款、滞销、新品）、预警库存周转与滞销、对比渠道和店铺盈利以分配资源。</li>
+      <li><b>三方数据逐级可核对：</b>经营口径与财务口径核对，财务口径与资金口径核对，差异能说明来源。</li>
+    </ul>
+
+    <h3>分目标（按优先级）</h3>
+    <table>
+      <thead><tr><th style="width:26%">分目标</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td><b>1. 按天的运营管理报表</b></td><td>按国家、平台、店铺、商品按天产出，让运营和管理层每天看到目标达成、团队绩效、库存与补货、价格与利润空间，及时调整经营动作。</td></tr>
+        <tr><td><b>2. 对应的财务管理报表</b></td><td>与运营报表口径对应。天表只含直接成本和费用，看各渠道、店铺、商品的贡献利润；月表在天表基础上加入报销、薪资等其他成本和费用，得出完整经营利润。</td></tr>
+        <tr><td><b>3. 统一规则、口径，完善系统</b></td><td>收入确认、成本、费用归类、主数据、手工凭证与将来自动凭证的对账规则；按业财一体化需要补齐业务系统功能。</td></tr>
+        <tr><td><b>4. 准确的现金流量表</b></td><td>准确反映各主体、各账户的资金收支和余额，并与财务口径数据核对。</td></tr>
+      </tbody>
+    </table>
+    <div class="note">延伸目标（逐步实现，不限于本半年度）：自动生成凭证、业务系统与电商平台全面打通、AI 辅助经营分析。</div>
   </section>
 
   <!-- 4 解决方案 -->
@@ -935,6 +1061,40 @@
         <span>影响历史数据回补范围（部分平台接口只能查近一段时间，更早的需后台导出）、实际成本与库存进销存的期初数，以及首版报表上线时间。</span>
       </li>
     </ol>
+  </section>
+
+  <!-- 摘要 -->
+  <section class="block" id="s0">
+    <div class="summary">
+      <div class="sbox">
+        <h4>要达成什么</h4>
+        <ul>
+          <li>按天的运营管理报表，服务目标达成、团队绩效、补货、定价等经营决策</li>
+          <li>与之对应的财务管理报表，两边可逐项核对</li>
+          <li>财务月表与资金对账体系，经营、财务、资金三方可核对</li>
+        </ul>
+      </div>
+      <div class="sbox">
+        <h4>为什么现在做不到</h4>
+        <ul>
+          <li>运营报表由两人分别制作，口径不统一</li>
+          <li>财务除档口外以手工表格充当凭证，按结算口径确认收入，缺发货口径和准确成本</li>
+          <li>一物多码等基础数据不统一，各平台口径各异</li>
+        </ul>
+      </div>
+      <div class="sbox wide">
+        <h4>核心思路：一份数据，多种口径</h4>
+        <p style="margin:0">同一套订单明细同时记录创建、支付、发货、结算四个时间。按支付时间汇总得到运营日报，按发货时间汇总得到财务管报，按结算账单得到财务月报。运营与财务数据同源，差异只来自时间归属，可以逐单追溯。</p>
+      </div>
+      <div class="sbox wide">
+        <h4>怎么推进</h4>
+        <ul>
+          <li><b>第一阶段</b>：运营天表、财务天表，实现平台 ↔ 运营 ↔ 财务核对；在天表基础上建立目标达成、团队绩效、补货、定价等经营分析模型</li>
+          <li><b>第二阶段</b>：财务月表、资金对账，先跑起来再逐步做准</li>
+          <li><b>第三阶段</b>：企业管理系统串通主流程，自动化、智能化</li>
+        </ul>
+      </div>
+    </div>
   </section>
 
   <footer>韩路 · 业财一体化经营数据体系建设 · IT 半年度工作规划</footer>
